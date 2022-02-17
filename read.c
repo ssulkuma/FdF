@@ -1,39 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/14 15:12:35 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/17 14:16:14 by ssulkuma         ###   ########.fr       */
+/*   Created: 2022/02/17 13:22:02 by ssulkuma          #+#    #+#             */
+/*   Updated: 2022/02/17 14:35:34 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "fdf.h"
 
-# include "./minilibx/mlx.h"
-# include "./libft/libft.h"
-
-# include <stdio.h>
-# include <fcntl.h>
-
-typedef struct s_map
+static int	count_rows(int fd, char *line)
 {
 	int		rows;
-	int		cols;
-}			t_map;
 
-typedef struct s_mlx
+	rows = 1;
+	while (line != NULL)
+	{
+		get_next_line(fd, &line);
+		rows++;
+	}
+	return (rows);
+}
+
+int	read_map(char *map_file)
 {
-	void	*connection;
-	void	*window;
-	float	x;
-	float	y;
-	float	z;
-}			t_mlx;
+	int		fd;
+	char	*line;
+	t_map	map;
 
-int	read_map(char *map_file);
-
-#endif
+	fd = open(map_file, O_RDONLY);
+	if (fd == -1)
+		return (-1);
+	get_next_line(fd, &line);
+	if (!line)
+		return (-1);
+	map.rows = count_rows(fd, line);
+	close(fd);
+	return (0);
+}
