@@ -6,38 +6,63 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:22:02 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/17 14:35:34 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/02/17 16:54:42 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	count_rows(int fd, char *line)
+static int	count_cols(char *line)
 {
-	int		rows;
+	int	index;
+	int	count;
 
-	rows = 1;
-	while (line != NULL)
+	index = 0;
+	count = 1;
+	if (line[index] == '\0')
+		count = 0;
+	while (line[index] != '\0')
 	{
-		get_next_line(fd, &line);
-		rows++;
+		if (line[index] == ' ')
+			count++;
+		index++;
 	}
-	return (rows);
+	return (count);
+}
+
+static void	get_map_size(int fd)
+{
+	int		ret;
+	int		cols;
+	char	*line;
+	t_map	map;
+
+	line = NULL;
+	map.rows = 0;
+	map.cols = 0;
+	while (1)
+	{
+		ret = get_next_line(fd, &line);
+		if (ret > 0)
+		{
+			cols = count_cols(line);
+			if (map.cols < cols)
+				map.cols = cols;
+			map.rows++;
+		}
+		else
+			break ;
+	}
 }
 
 int	read_map(char *map_file)
 {
 	int		fd;
-	char	*line;
-	t_map	map;
 
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
 		return (-1);
-	get_next_line(fd, &line);
-	if (!line)
-		return (-1);
-	map.rows = count_rows(fd, line);
+	get_map_size(fd);
 	close(fd);
 	return (0);
 }
