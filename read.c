@@ -6,11 +6,12 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:22:02 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/18 11:31:18 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/02/18 17:47:13 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 static int	count_cols(char *line)
 {
@@ -24,7 +25,10 @@ static int	count_cols(char *line)
 	while (line[index] != '\0')
 	{
 		if (line[index] == ' ')
+		{
 			count++;
+			index++;
+		}
 		index++;
 	}
 	return (count);
@@ -70,15 +74,43 @@ static int	**create_map(t_map *map)
 		if (!matrix[index])
 		{
 			while (index >= 0)
-			{
 				ft_memdel((void **)matrix[index--]);
-				ft_memdel((void **)matrix);
-				return (NULL);
-			}
+			ft_memdel((void **)matrix);
+			return (NULL);
 		}
+		ft_bzero(matrix[index], map->cols + 1);
 		index++;
 	}
 	return (matrix);
+}
+
+static int	fill_map(char *map_file, int fd, t_map *map)
+{
+	char	**numbers;
+	char	*line;
+	int		col;
+	int		row;
+
+	line = NULL;
+	col = 0;
+	row = 0;
+	fd = open(map_file, O_RDONLY);
+	if (fd == 1)
+		return (-1);
+	while (row < map->rows)
+	{
+		get_next_line(fd, &line);
+		while (col < map->cols)
+		{
+			numbers = ft_strsplit(line, ' ');
+			map->map[row][col] = ft_atoi(numbers[col]);
+			col++;
+		}
+		free(line);
+		col = 0;
+		row++;
+	}
+	return (0);
 }
 
 int	read_map(char *map_file)
@@ -94,5 +126,6 @@ int	read_map(char *map_file)
 	if (!map.map)
 		return (-1);
 	close(fd);
+	fill_map(map_file, fd, &map);
 	return (0);
 }

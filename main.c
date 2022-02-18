@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:51:12 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/17 17:11:21 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/02/18 11:43:31 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char **argv)
 	connection = mlx_init();
 	if (!connection)
 		error("connection");
-	window =  mlx_new_window(connection, 500, 500, "FdF");
+	window = mlx_new_window(connection, 500, 500, "FdF");
 	if (!window)
 		error("window");
 	mlx_loop(connection);
