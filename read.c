@@ -6,12 +6,11 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:22:02 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/18 18:14:26 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/02/18 19:48:56 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 static int	count_cols(char *line)
 {
@@ -49,6 +48,7 @@ static void	get_map_size(int fd, t_map *map)
 		ret_value = get_next_line(fd, &line);
 		if (ret_value > 0)
 		{
+			check_valid_chars(line, fd);
 			cols = count_cols(line);
 			if (map->cols < cols)
 				map->cols = cols;
@@ -85,7 +85,7 @@ static int	**create_map(t_map *map)
 	return (matrix);
 }
 
-static int	fill_map(char *map_file, int fd, t_map *map)
+static void	fill_map(char *map_file, int fd, t_map *map)
 {
 	char	**numbers;
 	char	*line;
@@ -97,7 +97,7 @@ static int	fill_map(char *map_file, int fd, t_map *map)
 	row = 0;
 	fd = open(map_file, O_RDONLY);
 	if (fd == 1)
-		return (-1);
+		error("error");
 	while (row < map->rows)
 	{
 		get_next_line(fd, &line);
@@ -111,7 +111,6 @@ static int	fill_map(char *map_file, int fd, t_map *map)
 		col = 0;
 		row++;
 	}
-	return (0);
 }
 
 int	read_map(char *map_file)
@@ -121,11 +120,11 @@ int	read_map(char *map_file)
 
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
-		return (-1);
+		error("error");
 	get_map_size(fd, &map);
 	map.map = create_map(&map);
 	if (!map.map)
-		return (-1);
+		error("error");
 	close(fd);
 	fill_map(map_file, fd, &map);
 	return (0);

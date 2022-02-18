@@ -6,12 +6,12 @@
 #    By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/14 15:11:52 by ssulkuma          #+#    #+#              #
-#    Updated: 2022/02/17 14:39:54 by ssulkuma         ###   ########.fr        #
+#    Updated: 2022/02/18 19:12:56 by ssulkuma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
-SRC_FILES = main.c read.c
+SRC_FILES = main.c read.c read_02.c
 OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))
 HEADERS = -I ./minilibx -I ./libft
 LIB = -L ./minilibx -lmlx -L ./libft -lft

@@ -1,42 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   read_02.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/14 15:12:35 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/18 19:41:38 by ssulkuma         ###   ########.fr       */
+/*   Created: 2022/02/18 19:00:32 by ssulkuma          #+#    #+#             */
+/*   Updated: 2022/02/18 19:52:02 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "fdf.h"
 
-# include "./minilibx/mlx.h"
-# include "./libft/libft.h"
-
-# include <stdio.h>
-# include <fcntl.h>
-
-typedef struct s_map
+void	check_valid_chars(char *line, int fd)
 {
-	int		rows;
-	int		cols;
-	int		**map;
-}			t_map;
+	int	index;
 
-typedef struct s_mlx
-{
-	void	*connection;
-	void	*window;
-	float	x;
-	float	y;
-	float	z;
-}			t_mlx;
-
-int		read_map(char *map_file);
-void	error(const char *str);
-void	check_valid_chars(char *line, int fd);
-
-#endif
+	index = 0;
+	while (line[index] != '\0')
+	{
+		if (ft_isdigit(line[index]) || line[index] == ' ' || line[index] == '-')
+			index++;
+		else
+		{
+			close(fd);
+			ft_putendl("error: invalid map");
+			exit(1);
+		}
+	}
+}

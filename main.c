@@ -6,13 +6,13 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:51:12 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/18 11:43:31 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/02/18 18:50:25 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	error(const char *str)
+void	error(const char *str)
 {
 	perror(str);
 	exit(1);
@@ -20,8 +20,7 @@ static void	error(const char *str)
 
 int	main(int argc, char **argv)
 {
-	void	*connection;
-	void	*window;
+	t_mlx	mlx;
 	int		rd_value;
 
 	if (argc != 2)
@@ -31,13 +30,13 @@ int	main(int argc, char **argv)
 	}
 	rd_value = read_map(argv[1]);
 	if (rd_value == -1)
-		error(argv[1]);
-	connection = mlx_init();
-	if (!connection)
-		error("connection");
-	window = mlx_new_window(connection, 500, 500, "FdF");
-	if (!window)
-		error("window");
-	mlx_loop(connection);
+		error("error");
+	mlx.connection = mlx_init();
+	if (!mlx.connection)
+		error("error");
+	mlx.window = mlx_new_window(mlx.connection, 500, 500, "FdF");
+	if (!mlx.window)
+		error("error");
+	mlx_loop(mlx.connection);
 	return (0);
 }
