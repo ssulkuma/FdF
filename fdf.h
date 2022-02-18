@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:12:35 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/17 14:16:14 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/02/18 11:26:43 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_map
 {
 	int		rows;
 	int		cols;
+	int		**map;
 }			t_map;
 
 typedef struct s_mlx
