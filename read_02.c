@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 19:00:32 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/18 19:52:02 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/02/18 20:01:06 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	check_valid_chars(char *line, int fd)
 			index++;
 		else
 		{
+			free(line);
 			close(fd);
 			ft_putendl("error: invalid map");
 			exit(1);
