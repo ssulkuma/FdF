@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:22:02 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/18 17:47:13 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/02/18 18:14:26 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static int	count_cols(char *line)
 		if (line[index] == ' ')
 		{
 			count++;
-			index++;
+			while (line[index++] == ' ')
+				index++;
 		}
 		index++;
 	}
