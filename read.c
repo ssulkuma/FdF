@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:22:02 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/18 19:48:56 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/02/21 15:01:14 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ static void	fill_map(char *map_file, int fd, t_map *map)
 		col = 0;
 		row++;
 	}
+	close(fd);
 }
 
 int	read_map(char *map_file)
@@ -123,9 +124,9 @@ int	read_map(char *map_file)
 		error("error");
 	get_map_size(fd, &map);
 	map.map = create_map(&map);
+	close(fd);
 	if (!map.map)
 		error("error");
-	close(fd);
 	fill_map(map_file, fd, &map);
 	return (0);
 }
