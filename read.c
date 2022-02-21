@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:22:02 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/21 15:01:14 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/02/21 17:52:18 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void	fill_map(char *map_file, int fd, t_map *map)
 	col = 0;
 	row = 0;
 	fd = open(map_file, O_RDONLY);
-	if (fd == 1)
+	if (fd == -1)
 		error("error");
 	while (row < map->rows)
 	{
