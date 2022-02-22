@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 19:00:32 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/21 12:33:51 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/02/22 16:27:04 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ void	check_valid_chars(char *line, int fd)
 	int	index;
 
 	index = 0;
+	printf("%s%s\n", "LINE ", line);
 	while (line[index] != '\0')
 	{
 		if (ft_isdigit(line[index]) || line[index] == ' ' || line[index] == '-')
 		{
-			if (line[index] == '-' && line[index++] == '-')
+			if (line[index] == '-' && line[index + 1] == '-')
 				invalid_map_error(line, fd);
 			index++;
 		}

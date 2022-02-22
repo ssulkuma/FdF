@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:22:02 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/21 17:52:18 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/02/22 17:59:55 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,13 @@ static int	count_cols(char *line)
 		if (line[index] == ' ')
 		{
 			count++;
-			while (line[index++] == ' ')
+			while (line[index + 1] == ' ')
 				index++;
 		}
 		index++;
 	}
+	if (line[index - 1] == ' ')
+		count--;
 	return (count);
 }
 
@@ -50,6 +52,9 @@ static void	get_map_size(int fd, t_map *map)
 		{
 			check_valid_chars(line, fd);
 			cols = count_cols(line);
+			printf("%d\n", cols);
+			if (cols == 0)
+				error("error");
 			if (map->cols < cols)
 				map->cols = cols;
 			free(line);
@@ -65,7 +70,7 @@ static int	**create_map(t_map *map)
 	int		**matrix;
 	int		index;
 
-	matrix = (int **)malloc(sizeof(int *) * (map->rows + 1));
+	matrix = (int **)malloc(sizeof(int *) * (map->rows));
 	if (!matrix)
 		return (NULL);
 	index = 0;
@@ -114,19 +119,18 @@ static void	fill_map(char *map_file, int fd, t_map *map)
 	close(fd);
 }
 
-int	read_map(char *map_file)
+int	read_map(char *map_file, t_map *map)
 {
 	int		fd;
-	t_map	map;
 
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
 		error("error");
-	get_map_size(fd, &map);
-	map.map = create_map(&map);
+	get_map_size(fd, map);
+	map->map = create_map(map);
 	close(fd);
-	if (!map.map)
+	if (!map->map)
 		error("error");
-	fill_map(map_file, fd, &map);
+	fill_map(map_file, fd, map);
 	return (0);
 }
