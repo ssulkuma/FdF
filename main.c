@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:51:12 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/22 18:52:00 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:20:32 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int argc, char **argv)
 	mlx.window = mlx_new_window(mlx.connection, 500, 500, "FdF");
 	if (!mlx.window)
 		error("error");
+	draw(&mlx);
 	events(&mlx);
 	mlx_loop(mlx.connection);
 	return (0);
