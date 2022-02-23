@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 19:00:32 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/22 16:27:04 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/02/23 11:38:53 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	check_valid_chars(char *line, int fd)
 	int	index;
 
 	index = 0;
-	printf("%s%s\n", "LINE ", line);
 	while (line[index] != '\0')
 	{
 		if (ft_isdigit(line[index]) || line[index] == ' ' || line[index] == '-')

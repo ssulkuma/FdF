@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:12:35 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/22 12:09:16 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/02/22 18:51:38 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ typedef struct s_mlx
 int		read_map(char *map_file, t_map *map);
 void	error(const char *str);
 void	check_valid_chars(char *line, int fd);
-void	events(t_mlx *mlx, t_map *map);
+void	events(t_mlx *mlx);
 
 #endif

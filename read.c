@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:22:02 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/22 17:59:55 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/02/23 11:38:32 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static void	get_map_size(int fd, t_map *map)
 		{
 			check_valid_chars(line, fd);
 			cols = count_cols(line);
-			printf("%d\n", cols);
 			if (cols == 0)
 				error("error");
 			if (map->cols < cols)
@@ -70,7 +69,7 @@ static int	**create_map(t_map *map)
 	int		**matrix;
 	int		index;
 
-	matrix = (int **)malloc(sizeof(int *) * (map->rows));
+	matrix = (int **)malloc(sizeof(int *) * (map->rows + 1));
 	if (!matrix)
 		return (NULL);
 	index = 0;
@@ -109,6 +108,8 @@ static void	fill_map(char *map_file, int fd, t_map *map)
 		while (col < map->cols)
 		{
 			numbers = ft_strsplit(line, ' ');
+			if (numbers[col] == NULL)
+				break ;
 			map->map[row][col] = ft_atoi(numbers[col]);
 			col++;
 		}
