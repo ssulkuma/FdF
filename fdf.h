@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:12:35 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/23 17:18:07 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/02/23 18:59:06 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_mlx
 	float	x;
 	float	y;
 	float	z;
-	t_map	map;
+	t_map	*map;
 }			t_mlx;
 
 void	read_map(char *map_file, t_map *map);
