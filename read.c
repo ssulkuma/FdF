@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:22:02 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/23 11:38:32 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/02/23 12:07:17 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	**create_map(t_map *map)
 	return (matrix);
 }
 
-static void	fill_map(char *map_file, int fd, t_map *map)
+static void	fill_map(int fd, t_map *map)
 {
 	char	**numbers;
 	char	*line;
@@ -99,9 +99,6 @@ static void	fill_map(char *map_file, int fd, t_map *map)
 	line = NULL;
 	col = 0;
 	row = 0;
-	fd = open(map_file, O_RDONLY);
-	if (fd == -1)
-		error("error");
 	while (row < map->rows)
 	{
 		get_next_line(fd, &line);
@@ -117,7 +114,6 @@ static void	fill_map(char *map_file, int fd, t_map *map)
 		col = 0;
 		row++;
 	}
-	close(fd);
 }
 
 int	read_map(char *map_file, t_map *map)
@@ -132,6 +128,10 @@ int	read_map(char *map_file, t_map *map)
 	close(fd);
 	if (!map->map)
 		error("error");
-	fill_map(map_file, fd, map);
+	fd = open(map_file, O_RDONLY);
+	if (fd == -1)
+		error("error");
+	fill_map(fd, map);
+	close(fd);
 	return (0);
 }
