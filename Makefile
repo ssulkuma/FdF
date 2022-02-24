@@ -6,7 +6,7 @@
 #    By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/14 15:11:52 by ssulkuma          #+#    #+#              #
-#    Updated: 2022/02/23 17:18:26 by ssulkuma         ###   ########.fr        #
+#    Updated: 2022/02/24 14:59:50 by ssulkuma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,8 @@ all: $(NAME)
 
 $(NAME): $(OBJ_FILES)
 	make -C ./libft
-	gcc $(FLAGS) -c $(SRC_FILES) $(HEADERS)
-	gcc $(FLAGS) -o $(NAME) $(OBJ_FILES) $(LIB) $(FRAMEWORK)
+	arch -x86_64 gcc $(FLAGS) -c $(SRC_FILES) $(HEADERS)
+	arch -x86_64 gcc $(FLAGS) -o $(NAME) $(OBJ_FILES) $(LIB) $(FRAMEWORK)
 
 clean:
 	make -C ./libft clean

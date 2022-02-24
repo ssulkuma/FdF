@@ -6,11 +6,24 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:51:12 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/23 17:20:32 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/02/24 18:00:41 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	free_map(t_map *map)
+{
+	printf("%d\n", map->rows);
+	printf("%d\n", map->cols);
+	while (map->rows >= 0)
+	{
+		free(map->map[map->cols]);
+		map->rows--;
+	}
+	free(map->map);
+	exit(0);
+}
 
 void	error(const char *str)
 {
@@ -35,8 +48,9 @@ int	main(int argc, char **argv)
 	mlx.window = mlx_new_window(mlx.connection, 500, 500, "FdF");
 	if (!mlx.window)
 		error("error");
-	draw(&mlx);
-	events(&mlx);
+	draw(&mlx, &map);
+	events(&mlx, &map);
 	mlx_loop(mlx.connection);
+	free_map(&map);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:12:35 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/23 18:59:06 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/02/24 18:06:21 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,19 @@ typedef struct s_mlx
 	int		bits_per_pixel;
 	int		line_len;
 	int		endian;
-	float	x;
-	float	y;
-	float	z;
-	t_map	*map;
+	float	start_x;
+	float	start_y;
+	float	start_z;
+	float	end_x;
+	float	end_y;
+	float	end_z;
 }			t_mlx;
 
 void	read_map(char *map_file, t_map *map);
 void	error(const char *str);
 void	check_valid_chars(char *line, int fd);
-void	events(t_mlx *mlx);
-void	draw(t_mlx *milx);
+void	events(t_mlx *mlx, t_map *map);
+void	draw(t_mlx *milx, t_map *map);
+void	free_map(t_map *map);
 
 #endif
