@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:12:35 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/24 18:06:21 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/02/28 19:06:40 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 # include <stdio.h>
 # include <fcntl.h>
+# include <math.h>
 
 typedef struct s_map
 {
@@ -46,8 +47,9 @@ typedef struct s_mlx
 void	read_map(char *map_file, t_map *map);
 void	error(const char *str);
 void	check_valid_chars(char *line, int fd);
-void	events(t_mlx *mlx, t_map *map);
+void	events(t_mlx *mlx);
 void	draw(t_mlx *milx, t_map *map);
 void	free_map(t_map *map);
+void	zoom(t_mlx *mlx);
 
 #endif

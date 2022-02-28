@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/22 19:05:50 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/25 12:44:09 by ssulkuma         ###   ########.fr       */
+/*   Created: 2022/02/28 19:08:21 by ssulkuma          #+#    #+#             */
+/*   Updated: 2022/02/28 19:12:49 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,35 @@
 
 static void	draw_pixel_to_image(t_mlx *mlx, int x, int y, int color)
 {
-	char	*dest;
+	char	*pixel;
 
-	dest = mlx->address + (y * mlx->line_len + x * (mlx->bits_per_pixel / 8));
-	*(unsigned int *)dest = color;
+	if (mlx->start_x >= 0 && mlx->start_x < 1000 && mlx->start_y >= 0
+		&& mlx->start_y < 1000)
+	{
+		pixel = mlx->address + (y * mlx->line_len + \
+			x * (mlx->bits_per_pixel / 8));
+		*(unsigned int *)pixel = color;
+	}
 }
 
 static float	get_max_delta(float step_x, float step_y)
 {
 	if (step_x < 0)
-		step_x *= -1;
+		step_x *= (-1);
 	if (step_y < 0)
-		step_y *= -1;
+		step_y *= (-1);
 	if (step_x > step_y)
 		return (step_x);
 	else
 		return (step_y);
+}
+
+static void	isometric(t_mlx *mlx)
+{
+	mlx->start_x = (mlx->start_x - mlx->start_y) * cos(1);
+	mlx->start_y = (mlx->start_x + mlx->start_y) * sin(1) - mlx->start_z;
+	mlx->end_x = (mlx->end_x - mlx->end_y) * cos(1);
+	mlx->end_y = (mlx->end_x + mlx->end_y) * sin(1) - mlx->end_z;
 }
 
 static void	draw_algorithm(t_mlx *mlx, t_map *map)
@@ -40,21 +53,18 @@ static void	draw_algorithm(t_mlx *mlx, t_map *map)
 
 	mlx->start_z = map->map[(int)mlx->start_y][(int)mlx->start_x];
 	mlx->end_z = map->map[(int)mlx->end_y][(int)mlx->end_x];
+	zoom(mlx);
+	isometric(mlx);
 	step_x = mlx->end_x - mlx->start_x;
-	step_y = mlx->end_y - mlx->start_x;
+	step_y = mlx->end_y - mlx->start_y;
 	max_delta = get_max_delta(step_x, step_y);
 	step_x /= max_delta;
 	step_y /= max_delta;
-	mlx->image = mlx_new_image(mlx->connection, 500, 500);
-	mlx->address = mlx_get_data_addr(mlx->image, &mlx->bits_per_pixel,
-			&mlx->line_len, &mlx->endian);
-	while (mlx->start_x - mlx->end_x || mlx->start_y - mlx->end_y)
+	while ((int)(mlx->start_x - mlx->end_x) || (int)(mlx->start_y - mlx->end_y))
 	{
-		draw_pixel_to_image(mlx, mlx->start_x, mlx->start_y, 0x00FF0000);
+		draw_pixel_to_image(mlx, mlx->start_x, mlx->start_y, 0x00FFFFFF);
 		mlx->start_x += step_x;
 		mlx->start_y += step_y;
-		if (mlx->start_x < 0 || mlx->start_x > 500 || mlx->start_y < 0 || mlx->start_y > 500)
-			break ;
 	}
 }
 
@@ -63,6 +73,9 @@ void	draw(t_mlx *mlx, t_map *map)
 	int	x;
 	int	y;
 
+	mlx->image = mlx_new_image(mlx->connection, 1000, 1000);
+	mlx->address = mlx_get_data_addr(mlx->image, &mlx->bits_per_pixel,
+			&mlx->line_len, &mlx->endian);
 	y = 0;
 	while (y < map->rows)
 	{

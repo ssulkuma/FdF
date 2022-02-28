@@ -6,12 +6,12 @@
 #    By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/14 15:11:52 by ssulkuma          #+#    #+#              #
-#    Updated: 2022/02/24 14:59:50 by ssulkuma         ###   ########.fr        #
+#    Updated: 2022/02/28 19:03:33 by ssulkuma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
-SRC_FILES = main.c read.c read_02.c events.c draw.c
+SRC_FILES = main.c read.c read_02.c events.c draw.c draw_02.c
 OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))
 HEADERS = -I ./minilibx -I ./libft
 LIB = -L ./minilibx -lmlx -L ./libft -lft
@@ -25,8 +25,8 @@ all: $(NAME)
 
 $(NAME): $(OBJ_FILES)
 	make -C ./libft
-	arch -x86_64 gcc $(FLAGS) -c $(SRC_FILES) $(HEADERS)
-	arch -x86_64 gcc $(FLAGS) -o $(NAME) $(OBJ_FILES) $(LIB) $(FRAMEWORK)
+	gcc $(FLAGS) -c $(SRC_FILES) $(HEADERS)
+	gcc $(FLAGS) -o $(NAME) $(OBJ_FILES) $(LIB) $(FRAMEWORK)
 
 clean:
 	make -C ./libft clean
