@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 19:02:28 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/01 12:50:58 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/01 17:10:01 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	add_zoom(t_mlx *mlx)
 {
-	mlx->start_x *= 30;
-	mlx->start_y *= 30;
-	mlx->end_x *= 30;
-	mlx->end_y *= 30;
+		mlx->start_x *= mlx->zoom;
+		mlx->start_y *= mlx->zoom;
+		mlx->end_x *= mlx->zoom;
+		mlx->end_y *= mlx->zoom;
 }
 
 void	isometric_projection(t_mlx *mlx)

@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:12:35 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/01 12:32:51 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/01 17:07:04 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,20 @@
 # include <fcntl.h>
 # include <math.h>
 
-typedef struct s_map
-{
-	int		rows;
-	int		cols;
-	int		**map;
-}			t_map;
-
 typedef struct s_mlx
 {
 	void	*connection;
 	void	*window;
 	void	*image;
 	char	*address;
+	int		rows;
+	int		cols;
+	int		**map;
 	int		bits_per_pixel;
 	int		line_len;
 	int		endian;
 	int		color;
+	int		zoom;
 	float	start_x;
 	float	start_y;
 	float	start_z;
@@ -45,12 +42,12 @@ typedef struct s_mlx
 	float	end_z;
 }			t_mlx;
 
-void	read_map(char *map_file, t_map *map);
+void	read_map(char *map_file, t_mlx *mlx);
 void	error(const char *str);
 void	check_valid_chars(char *line, int fd);
 void	events(t_mlx *mlx);
-void	draw(t_mlx *milx, t_map *map);
-void	free_map(t_map *map);
+void	draw(t_mlx *mlx);
+void	free_map(t_mlx *mlx);
 void	add_zoom(t_mlx *mlx);
 void	isometric_projection(t_mlx *mlx);
 void	center_position(t_mlx *mlx);

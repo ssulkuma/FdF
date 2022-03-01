@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 19:08:21 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/01 12:49:53 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/01 17:57:15 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ static float	get_max_delta(float step_x, float step_y)
 		return (step_y);
 }
 
-static void	draw_algorithm(t_mlx *mlx, t_map *map)
+static void	draw_algorithm(t_mlx *mlx)
 {
 	float	step_x;
 	float	step_y;
 	float	max_delta;
 
-	mlx->start_z = map->map[(int)mlx->start_y][(int)mlx->start_x];
-	mlx->end_z = map->map[(int)mlx->end_y][(int)mlx->end_x];
+	mlx->start_z = mlx->map[(int)mlx->start_y][(int)mlx->start_x];
+	mlx->end_z = mlx->map[(int)mlx->end_y][(int)mlx->end_x];
 	add_zoom(mlx);
 	center_position(mlx);
 	isometric_projection(mlx);
@@ -67,27 +67,27 @@ static void	draw_algorithm(t_mlx *mlx, t_map *map)
 	}
 }
 
-static void	draw_setup(t_mlx *mlx, t_map *map, int x, int y)
+static void	draw_setup(t_mlx *mlx, int x, int y)
 {
-	if (x < map->cols - 1)
+	if (x < mlx->cols - 1)
 	{
 		mlx->start_x = x;
 		mlx->start_y = y;
 		mlx->end_x = x + 1;
 		mlx->end_y = y;
-		draw_algorithm(mlx, map);
+		draw_algorithm(mlx);
 	}
-	if (y < map->rows - 1)
+	if (y < mlx->rows - 1)
 	{
 		mlx->start_x = x;
 		mlx->start_y = y;
 		mlx->end_x = x;
 		mlx->end_y = y + 1;
-		draw_algorithm(mlx, map);
+		draw_algorithm(mlx);
 	}
 }
 
-void	draw(t_mlx *mlx, t_map *map)
+void	draw(t_mlx *mlx)
 {
 	int	x;
 	int	y;
@@ -97,12 +97,12 @@ void	draw(t_mlx *mlx, t_map *map)
 	mlx->address = mlx_get_data_addr(mlx->image, &mlx->bits_per_pixel,
 			&mlx->line_len, &mlx->endian);
 	y = 0;
-	while (y < map->rows)
+	while (y < mlx->rows)
 	{
 		x = 0;
-		while (x < map->cols)
+		while (x < mlx->cols)
 		{
-			draw_setup(mlx, map, x, y);
+			draw_setup(mlx, x, y);
 			x++;
 		}
 		y++;

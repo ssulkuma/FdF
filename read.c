@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:22:02 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/23 12:21:47 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/01 17:19:04 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ static int	count_cols(char *line)
 	return (count);
 }
 
-static void	get_map_size(int fd, t_map *map)
+static void	get_map_size(int fd, t_mlx *mlx)
 {
 	int		ret_value;
 	int		cols;
 	char	*line;
 
 	line = NULL;
-	map->rows = 0;
-	map->cols = 0;
+	mlx->rows = 0;
+	mlx->cols = 0;
 	while (1)
 	{
 		ret_value = get_next_line(fd, &line);
@@ -54,28 +54,28 @@ static void	get_map_size(int fd, t_map *map)
 			cols = count_cols(line);
 			if (cols == 0)
 				error("error");
-			if (map->cols < cols)
-				map->cols = cols;
+			if (mlx->cols < cols)
+				mlx->cols = cols;
 			free(line);
-			map->rows++;
+			mlx->rows++;
 		}
 		else
 			break ;
 	}
 }
 
-static int	**create_map(t_map *map)
+static int	**create_map(t_mlx *mlx)
 {
 	int		**matrix;
 	int		index;
 
-	matrix = (int **)malloc(sizeof(int *) * (map->rows + 1));
+	matrix = (int **)malloc(sizeof(int *) * (mlx->rows + 1));
 	if (!matrix)
 		return (NULL);
 	index = 0;
-	while (index < map->rows)
+	while (index < mlx->rows)
 	{
-		matrix[index] = (int *)malloc(sizeof(int) * (map->cols + 1));
+		matrix[index] = (int *)malloc(sizeof(int) * (mlx->cols + 1));
 		if (!matrix[index])
 		{
 			while (index >= 0)
@@ -83,13 +83,13 @@ static int	**create_map(t_map *map)
 			ft_memdel((void **)matrix);
 			return (NULL);
 		}
-		ft_bzero(matrix[index], map->cols + 1);
+		ft_bzero(matrix[index], mlx->cols + 1);
 		index++;
 	}
 	return (matrix);
 }
 
-static void	fill_map(int fd, t_map *map)
+static void	fill_map(int fd, t_mlx *mlx)
 {
 	char	**numbers;
 	char	*line;
@@ -99,15 +99,15 @@ static void	fill_map(int fd, t_map *map)
 	line = NULL;
 	col = 0;
 	row = 0;
-	while (row < map->rows)
+	while (row < mlx->rows)
 	{
 		get_next_line(fd, &line);
-		while (col < map->cols)
+		while (col < mlx->cols)
 		{
 			numbers = ft_strsplit(line, ' ');
 			if (numbers[col] == NULL)
 				break ;
-			map->map[row][col] = ft_atoi(numbers[col]);
+			mlx->map[row][col] = ft_atoi(numbers[col]);
 			col++;
 		}
 		free(line);
@@ -116,21 +116,21 @@ static void	fill_map(int fd, t_map *map)
 	}
 }
 
-void	read_map(char *map_file, t_map *map)
+void	read_map(char *map_file, t_mlx *mlx)
 {
 	int		fd;
 
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
 		error("error");
-	get_map_size(fd, map);
-	map->map = create_map(map);
+	get_map_size(fd, mlx);
+	mlx->map = create_map(mlx);
 	close(fd);
-	if (!map->map)
+	if (!mlx->map)
 		error("error");
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
 		error("error");
-	fill_map(fd, map);
+	fill_map(fd, mlx);
 	close(fd);
 }
