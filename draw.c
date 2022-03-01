@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 19:08:21 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/28 19:12:49 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/01 12:49:53 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ static void	draw_pixel_to_image(t_mlx *mlx, int x, int y, int color)
 {
 	char	*pixel;
 
+	if (mlx->start_z > 0 && mlx->start_z < 11)
+		mlx->color = 0x00D2A2BA;
+	else if (mlx->start_z > 11)
+		mlx->color = 0x00F41182;
+	else
+		mlx->color = 0x00FFFFFF;
 	if (mlx->start_x >= 0 && mlx->start_x < 1000 && mlx->start_y >= 0
 		&& mlx->start_y < 1000)
 	{
@@ -37,14 +43,6 @@ static float	get_max_delta(float step_x, float step_y)
 		return (step_y);
 }
 
-static void	isometric(t_mlx *mlx)
-{
-	mlx->start_x = (mlx->start_x - mlx->start_y) * cos(1);
-	mlx->start_y = (mlx->start_x + mlx->start_y) * sin(1) - mlx->start_z;
-	mlx->end_x = (mlx->end_x - mlx->end_y) * cos(1);
-	mlx->end_y = (mlx->end_x + mlx->end_y) * sin(1) - mlx->end_z;
-}
-
 static void	draw_algorithm(t_mlx *mlx, t_map *map)
 {
 	float	step_x;
@@ -53,8 +51,9 @@ static void	draw_algorithm(t_mlx *mlx, t_map *map)
 
 	mlx->start_z = map->map[(int)mlx->start_y][(int)mlx->start_x];
 	mlx->end_z = map->map[(int)mlx->end_y][(int)mlx->end_x];
-	zoom(mlx);
-	isometric(mlx);
+	add_zoom(mlx);
+	center_position(mlx);
+	isometric_projection(mlx);
 	step_x = mlx->end_x - mlx->start_x;
 	step_y = mlx->end_y - mlx->start_y;
 	max_delta = get_max_delta(step_x, step_y);
@@ -62,9 +61,29 @@ static void	draw_algorithm(t_mlx *mlx, t_map *map)
 	step_y /= max_delta;
 	while ((int)(mlx->start_x - mlx->end_x) || (int)(mlx->start_y - mlx->end_y))
 	{
-		draw_pixel_to_image(mlx, mlx->start_x, mlx->start_y, 0x00FFFFFF);
+		draw_pixel_to_image(mlx, mlx->start_x, mlx->start_y, mlx->color);
 		mlx->start_x += step_x;
 		mlx->start_y += step_y;
+	}
+}
+
+static void	draw_setup(t_mlx *mlx, t_map *map, int x, int y)
+{
+	if (x < map->cols - 1)
+	{
+		mlx->start_x = x;
+		mlx->start_y = y;
+		mlx->end_x = x + 1;
+		mlx->end_y = y;
+		draw_algorithm(mlx, map);
+	}
+	if (y < map->rows - 1)
+	{
+		mlx->start_x = x;
+		mlx->start_y = y;
+		mlx->end_x = x;
+		mlx->end_y = y + 1;
+		draw_algorithm(mlx, map);
 	}
 }
 
@@ -73,6 +92,7 @@ void	draw(t_mlx *mlx, t_map *map)
 	int	x;
 	int	y;
 
+	mlx->color = 0x00FFFFFF;
 	mlx->image = mlx_new_image(mlx->connection, 1000, 1000);
 	mlx->address = mlx_get_data_addr(mlx->image, &mlx->bits_per_pixel,
 			&mlx->line_len, &mlx->endian);
@@ -82,22 +102,7 @@ void	draw(t_mlx *mlx, t_map *map)
 		x = 0;
 		while (x < map->cols)
 		{
-			if (x < map->cols - 1)
-			{
-				mlx->start_x = x;
-				mlx->start_y = y;
-				mlx->end_x = x + 1;
-				mlx->end_y = y;
-				draw_algorithm(mlx, map);
-			}
-			if (y < map->rows - 1)
-			{
-				mlx->start_x = x;
-				mlx->start_y = y;
-				mlx->end_x = x;
-				mlx->end_y = y + 1;
-				draw_algorithm(mlx, map);
-			}
+			draw_setup(mlx, map, x, y);
 			x++;
 		}
 		y++;

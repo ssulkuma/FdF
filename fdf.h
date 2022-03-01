@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:12:35 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/02/28 19:06:40 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/01 12:32:51 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_mlx
 	int		bits_per_pixel;
 	int		line_len;
 	int		endian;
+	int		color;
 	float	start_x;
 	float	start_y;
 	float	start_z;
@@ -50,6 +51,8 @@ void	check_valid_chars(char *line, int fd);
 void	events(t_mlx *mlx);
 void	draw(t_mlx *milx, t_map *map);
 void	free_map(t_map *map);
-void	zoom(t_mlx *mlx);
+void	add_zoom(t_mlx *mlx);
+void	isometric_projection(t_mlx *mlx);
+void	center_position(t_mlx *mlx);
 
 #endif
