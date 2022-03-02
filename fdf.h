@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:12:35 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/01 17:07:04 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/02 19:09:10 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_mlx
 	int		endian;
 	int		color;
 	int		zoom;
+	int		position_x;
+	int		position_y;
 	float	start_x;
 	float	start_y;
 	float	start_z;

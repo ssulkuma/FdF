@@ -6,24 +6,35 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:15:37 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/02 12:02:46 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/02 19:21:08 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+static void	movement_keys(int keycode, t_mlx *mlx)
+{
+	if (keycode == 27)
+		mlx->zoom += 1;
+	if (keycode == 44)
+		mlx->zoom -= 1;
+	if (keycode == 123)
+		mlx->position_x -= 10;
+	if (keycode == 124)
+		mlx->position_x += 10;
+	if (keycode == 125)
+		mlx->position_y -= 10;
+	if (keycode == 126)
+		mlx->position_y += 10;
+	mlx_destroy_image(mlx->connection, mlx->image);
+	mlx_clear_window(mlx->connection, mlx->window);
+	draw(mlx);
+}
+
 static int	key_events(int keycode, t_mlx *mlx)
 {
-	if (keycode == 27 || keycode == 44)
-	{
-		if (keycode == 27)
-			mlx->zoom += 1;
-		if (keycode == 44)
-			mlx->zoom -= 1;
-		mlx_destroy_image(mlx->connection, mlx->image);
-		mlx_clear_window(mlx->connection, mlx->window);
-		draw(mlx);
-	}
+	if (keycode == 27 || keycode == 44 || keycode >= 123 || keycode <= 126)
+		movement_keys(keycode, mlx);
 	if (keycode == 53)
 	{
 		mlx_destroy_image(mlx->connection, mlx->image);
