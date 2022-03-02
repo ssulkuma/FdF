@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:51:12 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/01 17:56:57 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/02 12:08:57 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 
 void	free_map(t_mlx *mlx)
 {
-	printf("%d\n", mlx->rows);
-	printf("%d\n", mlx->cols);
-	while (mlx->rows > 0)
-	{
-		free(mlx->map[mlx->rows]);
-		mlx->rows--;
-	}
+	int	index;
+
+	index = 0;
+	while (mlx->rows > index)
+		free(mlx->map[index++]);
 	free(mlx->map);
 	exit(0);
 }

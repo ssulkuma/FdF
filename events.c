@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:15:37 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/01 18:02:57 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/02 12:02:46 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static int	key_events(int keycode, t_mlx *mlx)
 	}
 	if (keycode == 53)
 	{
-		free_map(mlx);
 		mlx_destroy_image(mlx->connection, mlx->image);
 		mlx_destroy_window(mlx->connection, mlx->window);
+		free_map(mlx);
 		exit (0);
 	}
 	return (0);
@@ -36,5 +36,5 @@ static int	key_events(int keycode, t_mlx *mlx)
 
 void	events(t_mlx *mlx)
 {
-	mlx_hook(mlx->window, 2, 0, key_events, &mlx);
+	mlx_hook(mlx->window, 2, 0, key_events, mlx);
 }
