@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:12:35 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/02 19:09:10 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/03 14:57:09 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ typedef struct s_mlx
 	int		zoom;
 	int		position_x;
 	int		position_y;
+	int		color_t;
+	int		color_r;
+	int		color_g;
+	int		color_b;
 	float	start_x;
 	float	start_y;
 	float	start_z;
@@ -53,5 +57,6 @@ void	free_map(t_mlx *mlx);
 void	add_zoom(t_mlx *mlx);
 void	isometric_projection(t_mlx *mlx);
 void	center_position(t_mlx *mlx);
+void	draw_color(t_mlx *mlx);
 
 #endif

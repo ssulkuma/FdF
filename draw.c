@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 19:08:21 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/01 17:57:15 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/03 14:55:35 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,7 @@ static void	draw_pixel_to_image(t_mlx *mlx, int x, int y, int color)
 {
 	char	*pixel;
 
-	if (mlx->start_z > 0 && mlx->start_z < 11)
-		mlx->color = 0x00D2A2BA;
-	else if (mlx->start_z > 11)
-		mlx->color = 0x00F41182;
-	else
-		mlx->color = 0x00FFFFFF;
+	draw_color(mlx);
 	if (mlx->start_x >= 0 && mlx->start_x < 1000 && mlx->start_y >= 0
 		&& mlx->start_y < 1000)
 	{
@@ -92,7 +87,6 @@ void	draw(t_mlx *mlx)
 	int	x;
 	int	y;
 
-	mlx->color = 0x00FFFFFF;
 	mlx->image = mlx_new_image(mlx->connection, 1000, 1000);
 	mlx->address = mlx_get_data_addr(mlx->image, &mlx->bits_per_pixel,
 			&mlx->line_len, &mlx->endian);

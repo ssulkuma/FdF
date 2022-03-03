@@ -6,11 +6,46 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:51:12 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/02 19:08:36 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/03 17:08:37 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void	check_color_arguments(t_mlx *mlx, char **argv)
+{
+	int	red;
+	int	green;
+	int	blue;
+
+	if (argv[2] && argv[3] && argv[4])
+	{
+		red = ft_atoi(argv[2]);
+		green = ft_atoi(argv[3]);
+		blue = ft_atoi(argv[4]);
+		if (red >= 0 && red <= 255 && green >= 0 && green <= 255
+			&& blue >= 0 && blue <= 255)
+		{
+			mlx->color_r = red;
+			mlx->color_g = green;
+			mlx->color_b = blue;
+		}
+		else
+			ft_putendl("Invalid colorvalues, using default colors.");
+	}
+}
+
+static void	struct_intel(t_mlx *mlx, char **argv)
+{
+	mlx->color_t = 0;
+	mlx->color_r = 255;
+	mlx->color_g = 0;
+	mlx->color_b = 0;
+	check_color_arguments(mlx, argv);
+	mlx->zoom = 30;
+	mlx->position_x = 500;
+	mlx->position_y = 250;
+}
 
 void	free_map(t_mlx *mlx)
 {
@@ -33,14 +68,13 @@ int	main(int argc, char **argv)
 {
 	t_mlx	mlx;
 
-	if (argc != 2)
+	if (argc != 5)
 	{
-		ft_putendl("Usage: ./fdf [map_file]");
+		ft_putendl("Usage: ./fdf [map_file] [red color (0-255)] \
+[green color (0-255)] [blue color (0-255)]");
 		return (1);
 	}
-	mlx.zoom = 30;
-	mlx.position_x = 500;
-	mlx.position_y = 250;
+	struct_intel(&mlx, argv);
 	read_map(argv[1], &mlx);
 	mlx.connection = mlx_init();
 	if (!mlx.connection)
