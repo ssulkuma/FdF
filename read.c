@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:22:02 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/01 17:19:04 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/03 18:04:58 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,10 @@ void	read_map(char *map_file, t_mlx *mlx)
 		error("error");
 	fd = open(map_file, O_RDONLY);
 	if (fd == -1)
+	{
+		free_map(mlx);
 		error("error");
+	}
 	fill_map(fd, mlx);
 	close(fd);
 }
