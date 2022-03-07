@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:51:12 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/03 18:12:19 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/04 17:09:01 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	struct_intel(t_mlx *mlx, char **argv)
 	mlx->color_g = 0;
 	mlx->color_b = 0;
 	check_color_arguments(mlx, argv);
+	mlx->top_color = get_color(mlx);
 	mlx->zoom = 30;
 	mlx->position_x = 500;
 	mlx->position_y = 250;
