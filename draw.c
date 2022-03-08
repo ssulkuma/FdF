@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 19:08:21 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/08 14:18:07 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/08 16:32:38 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void	draw_algorithm(t_mlx *mlx)
 {
 	float	step_x;
 	float	step_y;
+	float	color_step;
 	float	max_delta;
 
 	mlx->start_z = mlx->map[(int)mlx->start_y][(int)mlx->start_x];
@@ -50,12 +51,16 @@ static void	draw_algorithm(t_mlx *mlx)
 	isometric_projection(mlx);
 	step_x = mlx->end_x - mlx->start_x;
 	step_y = mlx->end_y - mlx->start_y;
+	if (step_x > step_y)
+		color_step = step_x;
+	else
+		color_step = step_y;
 	max_delta = get_max_delta(step_x, step_y);
 	step_x /= max_delta;
 	step_y /= max_delta;
 	while ((int)(mlx->start_x - mlx->end_x) || (int)(mlx->start_y - mlx->end_y))
 	{
-		draw_color(mlx, step_x, step_y);
+		draw_color(mlx, color_step);
 		draw_pixel_to_image(mlx, mlx->start_x, mlx->start_y, mlx->color);
 		mlx->start_x += step_x;
 		mlx->start_y += step_y;
