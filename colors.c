@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:41:58 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/08 16:56:44 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/08 20:03:25 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,15 @@ int	get_color(t_mlx *mlx)
 		| mlx->color_b);
 }
 
-static int	gradient(t_mlx *mlx, float color_step)
+static int	gradient(t_mlx *mlx, float max_delta, int color_add)
 {
 	int		red;
 	int		green;
 	int		blue;
 
-	printf("%s%.5f\n", "COLOR STEPS ", color_step);
-	red = (255 - (mlx->top_color >> 16)) / color_step;
-	green = (255 - (mlx->top_color >> 8 & 0xFF)) / color_step;
-	blue = (255 - (mlx->top_color & 0xFF)) / color_step;
-	printf("%s%d\n", "RED ", red);
-	printf("%s%d\n", "GREEN ", green);
-	printf("%s%d\n\n", "BLUE ", blue);
+	red = (255 - (mlx->top_color >> 16)) / max_delta;
+	green = (255 - (mlx->top_color >> 8 & 0xFF)) / max_delta;
+	blue = (255 - (mlx->top_color & 0xFF)) / max_delta;
 	if (mlx->start_z > mlx->end_z)
 	{
 		mlx->color_r = (mlx->color >> 16 & 0xFF) + red;
@@ -62,20 +58,20 @@ static int	gradient(t_mlx *mlx, float color_step)
 	}
 	else
 	{
-		mlx->color_r = (mlx->color >> 16 & 0xFF) - red;
-		mlx->color_g = (mlx->color >> 8 & 0xFF) - green;
-		mlx->color_b = (mlx->color & 0xFF) - blue;
+		mlx->color_r = 255 - (red * color_add);
+		mlx->color_g = 255 - (green * color_add);
+		mlx->color_b = 255 - (blue * color_add);
 	}
 	mlx->color = get_color(mlx);
 	return (mlx->color);
 }
 
-void	draw_color(t_mlx *mlx, float color_step)
+void	draw_color(t_mlx *mlx, float max_delta, int color_add)
 {
 	if (mlx->start_z == 0 && mlx->end_z == 0)
 		mlx->color = 0x00FFFFFF;
 	else if (mlx->start_z != 0 && mlx->end_z != 0 && mlx->start_z == mlx->end_z)
 		mlx->color = mlx->top_color;
 	else
-		mlx->color = gradient(mlx, color_step);
+		mlx->color = gradient(mlx, max_delta, color_add);
 }

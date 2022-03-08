@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:12:35 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/08 16:32:56 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/08 20:03:42 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	free_map(t_mlx *mlx);
 void	add_zoom(t_mlx *mlx);
 void	isometric_projection(t_mlx *mlx);
 void	center_position(t_mlx *mlx);
-void	draw_color(t_mlx *mlx, float color_step);
+void	draw_color(t_mlx *mlx, float max_delta, int color_add);
 void	check_color_arguments(t_mlx *mlx, char **argv);
 int		get_color(t_mlx *mlx);
 
