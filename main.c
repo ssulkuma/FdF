@@ -6,34 +6,11 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:51:12 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/04 17:09:01 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/08 13:48:05 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-static void	check_color_arguments(t_mlx *mlx, char **argv)
-{
-	int	red;
-	int	green;
-	int	blue;
-
-	if (argv[2] && argv[3] && argv[4])
-	{
-		red = ft_atoi(argv[2]);
-		green = ft_atoi(argv[3]);
-		blue = ft_atoi(argv[4]);
-		if (red >= 0 && red <= 255 && green >= 0 && green <= 255
-			&& blue >= 0 && blue <= 255)
-		{
-			mlx->color_r = red;
-			mlx->color_g = green;
-			mlx->color_b = blue;
-		}
-		else
-			ft_putendl("Invalid colorvalues, using default colors.");
-	}
-}
 
 static void	struct_intel(t_mlx *mlx, char **argv)
 {

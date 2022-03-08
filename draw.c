@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 19:08:21 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/07 17:53:49 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/08 14:18:07 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	draw_algorithm(t_mlx *mlx)
 	step_y /= max_delta;
 	while ((int)(mlx->start_x - mlx->end_x) || (int)(mlx->start_y - mlx->end_y))
 	{
-		draw_color(mlx, max_delta);
+		draw_color(mlx, step_x, step_y);
 		draw_pixel_to_image(mlx, mlx->start_x, mlx->start_y, mlx->color);
 		mlx->start_x += step_x;
 		mlx->start_y += step_y;
