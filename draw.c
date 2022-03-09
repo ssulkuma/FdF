@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 19:08:21 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/08 20:04:15 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/09 15:45:02 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,5 @@ void	draw(t_mlx *mlx)
 		y++;
 	}
 	mlx_put_image_to_window(mlx->connection, mlx->window, mlx->image, 0, 0);
+	menu(mlx);
 }
