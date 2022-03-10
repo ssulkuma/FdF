@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:12:35 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/09 16:01:44 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/09 16:14:48 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_mlx
 	int		zoom;
 	int		position_x;
 	int		position_y;
+	int		altitude;
 	int		color_t;
 	int		color_r;
 	int		color_g;

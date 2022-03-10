@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:15:37 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/02 19:21:08 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/10 12:06:59 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,16 @@ static int	key_events(int keycode, t_mlx *mlx)
 {
 	if (keycode == 27 || keycode == 44 || keycode >= 123 || keycode <= 126)
 		movement_keys(keycode, mlx);
+	if (keycode == 2 || keycode == 32)
+	{
+		if (keycode == 2)
+			mlx->altitude -= 1;
+		else
+			mlx->altitude += 1;
+		mlx_destroy_image(mlx->connection, mlx->image);
+		mlx_clear_window(mlx->connection, mlx->window);
+		draw(mlx);
+	}
 	if (keycode == 53)
 	{
 		mlx_destroy_image(mlx->connection, mlx->image);
