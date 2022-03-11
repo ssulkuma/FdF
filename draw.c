@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 19:08:21 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/10 11:51:47 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/11 12:06:47 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	draw_algorithm(t_mlx *mlx)
 		mlx->start_y += step_y;
 		color_add++;
 	}
-	mlx->color = mlx->top_color;
+	mlx->color = mlx->base_color;
 }
 
 static void	draw_setup(t_mlx *mlx, int x, int y)

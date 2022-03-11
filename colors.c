@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:41:58 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/08 20:03:25 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/11 12:05:39 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,11 @@ static int	gradient(t_mlx *mlx, float max_delta, int color_add)
 	int		green;
 	int		blue;
 
-	red = (255 - (mlx->top_color >> 16)) / max_delta;
-	green = (255 - (mlx->top_color >> 8 & 0xFF)) / max_delta;
-	blue = (255 - (mlx->top_color & 0xFF)) / max_delta;
-	if (mlx->start_z > mlx->end_z)
+	red = (255 - (mlx->base_color >> 16)) / max_delta;
+	green = (255 - (mlx->base_color >> 8 & 0xFF)) / max_delta;
+	blue = (255 - (mlx->base_color & 0xFF)) / max_delta;
+	if ((mlx->start_z > mlx->end_z && mlx->start_z >= 0 && mlx->end_z >= 0)
+		|| (mlx->start_z < mlx->end_z && mlx->start_z <= 0 && mlx->end_z <= 0))
 	{
 		mlx->color_r = (mlx->color >> 16 & 0xFF) + red;
 		mlx->color_g = (mlx->color >> 8 & 0xFF) + green;
@@ -71,7 +72,7 @@ void	draw_color(t_mlx *mlx, float max_delta, int color_add)
 	if (mlx->start_z == 0 && mlx->end_z == 0)
 		mlx->color = 0x00FFFFFF;
 	else if (mlx->start_z != 0 && mlx->end_z != 0 && mlx->start_z == mlx->end_z)
-		mlx->color = mlx->top_color;
+		mlx->color = mlx->base_color;
 	else
 		mlx->color = gradient(mlx, max_delta, color_add);
 }
