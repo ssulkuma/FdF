@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:12:35 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/11 12:06:02 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/14 11:38:38 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct s_mlx
 	int		color_g;
 	int		color_b;
 	int		base_color;
+	int		projection;
+	float	degree;
 	float	start_x;
 	float	start_y;
 	float	start_z;

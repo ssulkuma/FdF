@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 19:08:21 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/11 12:06:47 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/14 11:39:51 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ static void	draw_algorithm(t_mlx *mlx)
 	mlx->end_z = mlx->map[(int)mlx->end_y][(int)mlx->end_x];
 	add_zoom(mlx);
 	center_position(mlx);
-	isometric_projection(mlx);
+	if (mlx->projection == 1)
+		isometric_projection(mlx);
 	step_x = mlx->end_x - mlx->start_x;
 	step_y = mlx->end_y - mlx->start_y;
 	max_delta = get_max_delta(step_x, step_y);

@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:37:12 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/11 12:07:09 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/14 11:44:57 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@ void	menu(t_mlx *mlx)
 	mlx_string_put(mlx->connection, mlx->window, 20, 40, color, "zoom: + / -");
 	mlx_string_put(mlx->connection, mlx->window, 20, 60, color, "move: arrows");
 	mlx_string_put(mlx->connection, mlx->window, 20, 80, color, "altitude: U / D");
-	mlx_string_put(mlx->connection, mlx->window, 20, 100, color, "close: esc");
+	mlx_string_put(mlx->connection, mlx->window, 20, 100, color, "projection: I / P");
+	mlx_string_put(mlx->connection, mlx->window, 20, 120, color, "degree: 1 / 2");
+	mlx_string_put(mlx->connection, mlx->window, 20, 140, color, "close: esc");
 }
