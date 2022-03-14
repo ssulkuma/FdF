@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:12:35 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/14 11:38:38 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/14 15:24:41 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,20 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
+
+# define ESC_KEY 53
+# define ARROW_LEFT 123
+# define ARROW_RIGHT 124
+# define ARROW_DOWN 125
+# define ARROW_UP 126
+# define PLUS_KEY 24
+# define MINUS_KEY 27
+# define U_KEY 32
+# define D_KEY 2
+# define I_KEY 34
+# define P_KEY 35
+# define ONE_KEY 18
+# define TWO_KEY 19
 
 typedef struct s_mlx
 {
