@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 19:08:21 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/14 11:39:51 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/15 12:20:00 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static void	draw_algorithm(t_mlx *mlx)
 	color_add = 0;
 	mlx->start_z = mlx->map[(int)mlx->start_y][(int)mlx->start_x];
 	mlx->end_z = mlx->map[(int)mlx->end_y][(int)mlx->end_x];
+	if (mlx->start_z > MAX_ALTITUDE || mlx->start_z < MIN_ALTITUDE || mlx->end_z > MAX_ALTITUDE || mlx->end_z < MIN_ALTITUDE)
+		return ;
 	add_zoom(mlx);
 	center_position(mlx);
 	if (mlx->projection == 1)
@@ -64,7 +66,6 @@ static void	draw_algorithm(t_mlx *mlx)
 		mlx->start_y += step_y;
 		color_add++;
 	}
-	mlx->color = mlx->base_color;
 }
 
 static void	draw_setup(t_mlx *mlx, int x, int y)

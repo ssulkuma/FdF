@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:12:35 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/14 15:24:41 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/15 11:08:56 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <fcntl.h>
 # include <math.h>
 
+# define MAX_ALTITUDE 10000
+# define MIN_ALTITUDE -10000
 # define ESC_KEY 53
 # define ARROW_LEFT 123
 # define ARROW_RIGHT 124

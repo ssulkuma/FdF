@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:41:58 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/11 12:05:39 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/15 12:18:37 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,15 @@ static int	gradient(t_mlx *mlx, float max_delta, int color_add)
 	int		green;
 	int		blue;
 
-	red = (255 - (mlx->base_color >> 16)) / max_delta;
+	red = (255 - (mlx->base_color >> 16 & 0xFF)) / max_delta;
 	green = (255 - (mlx->base_color >> 8 & 0xFF)) / max_delta;
 	blue = (255 - (mlx->base_color & 0xFF)) / max_delta;
 	if ((mlx->start_z > mlx->end_z && mlx->start_z >= 0 && mlx->end_z >= 0)
 		|| (mlx->start_z < mlx->end_z && mlx->start_z <= 0 && mlx->end_z <= 0))
 	{
-		mlx->color_r = (mlx->color >> 16 & 0xFF) + red;
-		mlx->color_g = (mlx->color >> 8 & 0xFF) + green;
-		mlx->color_b = (mlx->color & 0xFF) + blue;
+		mlx->color_r = (mlx->base_color >> 16 & 0xFF) + (red * color_add);
+		mlx->color_g = (mlx->base_color >> 8 & 0xFF) + (green * color_add);
+		mlx->color_b = (mlx->base_color & 0xFF) + (blue * color_add);
 	}
 	else
 	{
