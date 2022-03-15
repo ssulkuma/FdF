@@ -6,11 +6,39 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:41:58 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/15 12:18:37 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/15 15:16:33 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static int	check_if_digits(char **argv)
+{
+	int	index;
+
+	index = 0;
+	while (argv[2][index] != '\0')
+	{
+		if (!ft_isdigit(argv[2][index]))
+			return (0);
+		index++;
+	}
+	index = 0;
+	while (argv[3][index] != '\0')
+	{
+		if (!ft_isdigit(argv[3][index]))
+			return (0);
+		index++;
+	}
+	index = 0;
+	while (argv[4][index] != '\0')
+	{
+		if (!ft_isdigit(argv[4][index]))
+			return (0);
+		index++;
+	}
+	return (1);
+}
 
 void	check_color_arguments(t_mlx *mlx, char **argv)
 {
@@ -20,6 +48,11 @@ void	check_color_arguments(t_mlx *mlx, char **argv)
 
 	if (argv[2] && argv[3] && argv[4])
 	{
+		if (!check_if_digits(argv))
+		{
+			ft_putendl("Invalid colorvalues, using default colors.");
+			return ;
+		}
 		red = ft_atoi(argv[2]);
 		green = ft_atoi(argv[3]);
 		blue = ft_atoi(argv[4]);
