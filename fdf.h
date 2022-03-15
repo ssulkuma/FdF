@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:12:35 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/15 11:08:56 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/15 13:04:58 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 # define D_KEY 2
 # define I_KEY 34
 # define P_KEY 35
-# define ONE_KEY 18
-# define TWO_KEY 19
+# define SCROLL_UP 4
+# define SCROLL_DOWN 5
 
 typedef struct s_mlx
 {
