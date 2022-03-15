@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 16:51:12 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/15 15:09:08 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/15 16:01:47 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	struct_intel(t_mlx *mlx, char **argv)
 	mlx->zoom = 30;
 	mlx->position_x = 500;
 	mlx->position_y = 250;
-	mlx->altitude = 0;
+	mlx->altitude = 1;
 	mlx->degree = 1;
 	mlx->projection = 1;
 }
