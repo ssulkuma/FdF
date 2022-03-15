@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 19:00:32 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/15 14:59:22 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/15 15:54:13 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,12 @@ void	check_valid_chars(char *line, int fd)
 	index = 0;
 	while (line[index] != '\0')
 	{
-		if (ft_isdigit(line[index]) || line[index] == ' ' || line[index] == '-')
+		if (ft_isalnum(line[index]) || line[index] == ' ' || line[index] == '-'
+			|| line[index] == ',')
 		{
-			if (line[index] == '-' && line[index + 1] == '-')
+			if (line[index] == '-' && !ft_isalnum(line[index + 1]))
+				invalid_map_error(line, fd);
+			if (line[index] == ',' && !ft_isalnum(line[index + 1]))
 				invalid_map_error(line, fd);
 			index++;
 		}
