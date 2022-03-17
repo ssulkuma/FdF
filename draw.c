@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 19:08:21 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/15 12:20:00 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/17 11:05:54 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,19 @@ static void	draw_pixel_to_image(t_mlx *mlx, int x, int y, int color)
 	}
 }
 
-static float	get_max_delta(float step_x, float step_y)
+static void	draw_line(t_mlx *mlx, float step_x, float step_y, float max_delta)
 {
-	if (step_x < 0)
-		step_x *= (-1);
-	if (step_y < 0)
-		step_y *= (-1);
-	if (step_x > step_y)
-		return (step_x);
-	else
-		return (step_y);
+	int	color_add;
+
+	color_add = 0;
+	while ((int)(mlx->start_x - mlx->end_x) || (int)(mlx->start_y - mlx->end_y))
+	{
+		draw_color(mlx, max_delta, color_add);
+		draw_pixel_to_image(mlx, mlx->start_x, mlx->start_y, mlx->color);
+		mlx->start_x += step_x;
+		mlx->start_y += step_y;
+		color_add++;
+	}
 }
 
 static void	draw_algorithm(t_mlx *mlx)
@@ -42,12 +45,11 @@ static void	draw_algorithm(t_mlx *mlx)
 	float	step_x;
 	float	step_y;
 	float	max_delta;
-	int		color_add;
 
-	color_add = 0;
 	mlx->start_z = mlx->map[(int)mlx->start_y][(int)mlx->start_x];
 	mlx->end_z = mlx->map[(int)mlx->end_y][(int)mlx->end_x];
-	if (mlx->start_z > MAX_ALTITUDE || mlx->start_z < MIN_ALTITUDE || mlx->end_z > MAX_ALTITUDE || mlx->end_z < MIN_ALTITUDE)
+	if (mlx->start_z > MAX_ALTITUDE || mlx->start_z < MIN_ALTITUDE
+		|| mlx->end_z > MAX_ALTITUDE || mlx->end_z < MIN_ALTITUDE)
 		return ;
 	add_zoom(mlx);
 	center_position(mlx);
@@ -58,14 +60,7 @@ static void	draw_algorithm(t_mlx *mlx)
 	max_delta = get_max_delta(step_x, step_y);
 	step_x /= max_delta;
 	step_y /= max_delta;
-	while ((int)(mlx->start_x - mlx->end_x) || (int)(mlx->start_y - mlx->end_y))
-	{
-		draw_color(mlx, max_delta, color_add);
-		draw_pixel_to_image(mlx, mlx->start_x, mlx->start_y, mlx->color);
-		mlx->start_x += step_x;
-		mlx->start_y += step_y;
-		color_add++;
-	}
+	draw_line(mlx, step_x, step_y, max_delta);
 }
 
 static void	draw_setup(t_mlx *mlx, int x, int y)

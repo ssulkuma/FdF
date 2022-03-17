@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:12:35 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/15 13:04:58 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/17 10:56:42 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ void	menu(t_mlx *mlx);
 void	draw_color(t_mlx *mlx, float max_delta, int color_add);
 void	check_color_arguments(t_mlx *mlx, char **argv);
 int		get_color(t_mlx *mlx);
+float	get_max_delta(float step_x, float step_y);
 
 #endif
