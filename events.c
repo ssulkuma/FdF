@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:15:37 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/15 16:37:16 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/17 13:54:53 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	projection_keys(int keycode, t_mlx *mlx)
 		mlx->projection = 2;
 	}
 	if (keycode == D_KEY)
-		mlx->altitude -= 1;
+			mlx->altitude -= 1;
 	if (keycode == U_KEY)
 		mlx->altitude += 1;
 	mlx_destroy_image(mlx->connection, mlx->image);

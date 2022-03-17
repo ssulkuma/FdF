@@ -6,7 +6,7 @@
 /*   By: ssulkuma <ssulkuma@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 13:41:58 by ssulkuma          #+#    #+#             */
-/*   Updated: 2022/03/15 15:16:33 by ssulkuma         ###   ########.fr       */
+/*   Updated: 2022/03/17 14:27:55 by ssulkuma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ static int	gradient(t_mlx *mlx, float max_delta, int color_add)
 	red = (255 - (mlx->base_color >> 16 & 0xFF)) / max_delta;
 	green = (255 - (mlx->base_color >> 8 & 0xFF)) / max_delta;
 	blue = (255 - (mlx->base_color & 0xFF)) / max_delta;
+	if (!red && !green && !blue)
+		return (mlx->base_color);
 	if ((mlx->start_z > mlx->end_z && mlx->start_z >= 0 && mlx->end_z >= 0)
 		|| (mlx->start_z < mlx->end_z && mlx->start_z <= 0 && mlx->end_z <= 0))
 	{
